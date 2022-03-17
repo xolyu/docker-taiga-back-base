@@ -132,7 +132,8 @@ for latest in "${latests[@]}"; do
             travisEnv='\n    - VERSION='"$version"' VARIANT='"$variant$travisEnv"
 
             if [[ $1 == 'build' ]]; then
-                tag="travis-$version-$variant"
+                tag="$version-$variant"
+                travisTag="travis-$tag"
                 echo "Build Dockerfile for ${tag}"
                 docker build -t "${dockerRepo}:${tag}" "${dir}"
             fi
