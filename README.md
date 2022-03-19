@@ -1,17 +1,19 @@
 [![License: AGPL v3][uri_license_image]][uri_license]
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Monogramm/docker-taiga-back-base/Docker%20Image%20CI)](https://github.com/Monogramm/docker-taiga-back-base/actions)
-[![Docker Automated buid](https://img.shields.io/docker/cloud/build/monogramm/docker-taiga-back-base.svg)](https://hub.docker.com/r/monogramm/docker-taiga-back-base/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/monogramm/docker-taiga-back-base.svg)](https://hub.docker.com/r/monogramm/docker-taiga-back-base/)
-[![](https://images.microbadger.com/badges/version/monogramm/docker-taiga-back-base.svg)](https://microbadger.com/images/monogramm/docker-taiga-back-base)
-[![](https://images.microbadger.com/badges/image/monogramm/docker-taiga-back-base.svg)](https://microbadger.com/images/monogramm/docker-taiga-back-base)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/xolyu/docker-taiga-back-base/Docker%20Image%20CI)](https://github.com/xolyu/docker-taiga-back-base/actions)
+[![Docker Automated buid](https://img.shields.io/docker/cloud/build/xolyu/docker-taiga-back-base.svg)](https://hub.docker.com/r/xolyu/docker-taiga-back-base/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/xolyu/docker-taiga-back-base.svg)](https://hub.docker.com/r/xolyu/docker-taiga-back-base/)
+[![](https://images.microbadger.com/badges/version/xolyu/docker-taiga-back-base.svg)](https://microbadger.com/images/xolyu/docker-taiga-back-base)
+[![](https://images.microbadger.com/badges/image/xolyu/docker-taiga-back-base.svg)](https://microbadger.com/images/xolyu/docker-taiga-back-base)
 
 # Docker image for taiga-back
 
-This Docker repository provides the [taiga-back](https://github.com/taigaio/taiga-back) server with a configuration suitable to use with [taiga-front](https://github.com/taigaio/taiga-front).
+This Docker repository provides the [taiga-back](https://github.com/kaleidos-ventures/taiga-back) server with a configuration suitable to use with [taiga-front](https://github.com/kaleidos-ventures/taiga-front).
 
-This image was inspired by [ajira86/docker-taiga](https://github.com/ajira86/docker-taiga) which is a fork of [benhutchins/docker-taiga](https://github.com/benhutchins/docker-taiga).
+This image is a fork of [Monogramm/docker-taiga-back-base](https://github.com/Monogramm/docker-taiga-back-base) 
+which itself was inspired by [ajira86/docker-taiga](https://github.com/ajira86/docker-taiga) 
+which is a fork of [benhutchins/docker-taiga](https://github.com/benhutchins/docker-taiga).
 
-For a more advanced image and full docker-compose example, checkout [Monogramm/docker-taiga](https://github.com/Monogramm/docker-taiga).
+For a more advanced image and full docker-compose example, checkout [xolyu/docker-taiga](https://github.com/xolyu/docker-taiga).
 
 ## What is Taiga
 
@@ -21,7 +23,7 @@ Taiga is a project management platform for startups and agile developers & desig
 
 ## Supported tags
 
-<https://hub.docker.com/r/monogramm/docker-taiga-back-base/>
+<https://hub.docker.com/r/xolyu/docker-taiga-back-base/>
 
 <!-- >Docker Tags -->
 
@@ -48,7 +50,7 @@ If the image does not include the packages you need, you can easily build your o
 Start your derived image with the `FROM` statement and add whatever you like.
 
 ```Dockerfile
-FROM monogramm/docker-taiga-back-base:alpine
+FROM xolyu/docker-taiga-back-base:alpine
 
 RUN ...
 
@@ -56,7 +58,7 @@ RUN ...
 
 You can also clone this repository and use the [update.sh](update.sh) shell script to generate a new Dockerfile based on your own needs.
 
-For instance, you could build a container based on Dolibarr develop branch by setting the `update.sh` versions like this:
+For instance, you could build a container based on develop branch by setting the `update.sh` versions like this:
 
 ```bash
 latests=( "master" )
@@ -65,7 +67,7 @@ latests=( "master" )
 Then simply call [update.sh](update.sh) script.
 
 ```console
-bash update.sh
+./update.sh
 ```
 
 Your Dockerfile(s) will be generated in the `images/` folder.
@@ -74,7 +76,7 @@ Your Dockerfile(s) will be generated in the `images/` folder.
 
 The Taiga image supports auto configuration via environment variables. You can preconfigure nearly everything that is available in `local.py`.
 
-See [local.py.example](https://github.com/taigaio/taiga-back/blob/master/settings/local.py.example) and [docker-settings.py](https://github.com/Monogramm/docker-taiga-back-base/blob/master/docker-docker.py) for more details on configuration.
+See [config.py.prod.example](https://github.com/kaleidos-ventures/taiga-back/blob/main/settings/config.py.prod.example) and [docker.py](https://github.com/xolyu/docker-taiga-back-base/blob/master/template/docker.py) for more details on configuration.
 
 ### Gunicorn configuration
 
@@ -418,7 +420,7 @@ ASANA_IMPORTER_APP_SECRET=XXXXXX_get_a_valid_app_secret_from_asana_XXXXXX
 
 _Default value_: `False`
 
-Enable [Taiga Events](https://github.com/Monogramm/docker-taiga-events). Requires RabbitMQ.
+Enable [Taiga Events](https://github.com/xolyu/docker-taiga-events). Requires RabbitMQ.
 
 Examples:
 
@@ -443,6 +445,8 @@ RABBITMQ_PASSWORD=somethingverysecure
 RABBITMQ_HOST=taiga_rabbitmq
 RABBITMQ_PORT=5672
 ```
+
+_Ensure that `RABBITMQ_PASSWORD` doesn't contain URL special characters like `/`, `:`, `@` or similar._
 
 ### TAIGA_ASYNC_ENABLED
 
