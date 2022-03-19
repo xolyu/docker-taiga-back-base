@@ -88,6 +88,13 @@ if [ -z "$TAIGA_SKIP_DB_CHECK" ]; then
 
 fi
 
+#########################################
+if [ -f /custom_actions.sh ]; then
+  log "Executing custom actions script..."
+  /custom_actions.sh
+fi
+
+
 # ------------------------------------------------------------------------------
 # In case of frontend upgrade: locales and statics should be regenerated
 log "Compiling messages and collecting static"
